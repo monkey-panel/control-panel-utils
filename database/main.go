@@ -11,7 +11,7 @@ import (
 
 type DB struct{ *gorm.DB }
 
-func NewDB(filename string) (*DB, error) {
+func NewDB(filename string, setupModel func(db *DB)) (*DB, error) {
 	db, err := gorm.Open(sqlite.Open(filename), &gorm.Config{
 		Logger:  logger.Default.LogMode(logger.Info),
 		NowFunc: func() time.Time { return time.Now().UTC() },
