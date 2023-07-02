@@ -3,7 +3,6 @@ package database
 import (
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -22,8 +21,4 @@ func NewDB(filename string, setupModel func(db *DB)) (*DB, error) {
 	setupModel(new_db)
 
 	return new_db, err
-}
-
-func GetDBFromContext(ctx *gin.Context) *DB {
-	return ctx.MustGet("DB").(*DB)
 }
