@@ -43,9 +43,9 @@ func GenerateCACertificate() (*x509.Certificate, *rsa.PrivateKey) {
 	return ca, caKey
 }
 
-func GenerateCertificate(ca *x509.Certificate, caKey *rsa.PrivateKey) Certificate {
+func GenerateCertificate(ca *x509.Certificate, caKey *rsa.PrivateKey, organizations []string) Certificate {
 	cert := baseCertificate(1658)
-	cert.Subject.Organization = []string{"console-panel-api"}
+	cert.Subject.Organization = organizations
 	cert.SubjectKeyId = []byte{1, 2, 3, 4, 6}
 	cert.DNSNames = append(cert.DNSNames, "127.0.0.1")
 	cert.IPAddresses = append(cert.IPAddresses, net.ParseIP("0.0.0.0"))
